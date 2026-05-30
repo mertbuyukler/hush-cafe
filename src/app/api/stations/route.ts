@@ -9,7 +9,8 @@ export async function GET(request: Request) {
     const { searchParams } = new URL(request.url);
     const category = searchParams.get('category');
     
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     
     let query = 'SELECT * FROM stations ORDER BY created_at DESC';
     let results;
@@ -45,7 +46,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Name and Stream URL are required' }, { status: 400 });
     }
 
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     
     const { success } = await db.prepare(
       'INSERT INTO stations (name, description, stream_url, cover_image_url, category_id, is_featured) VALUES (?, ?, ?, ?, ?, ?)'

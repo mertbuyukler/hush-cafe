@@ -37,8 +37,8 @@ export default function StationGrid() {
         
         setStations(stationsData);
         setCategories(categoriesData);
-      } catch (err: any) {
-        setError(err.message || 'An error occurred while loading stations.');
+      } catch (err: unknown) {
+        setError(err instanceof Error ? err.message : 'An error occurred while loading stations.');
       } finally {
         setLoading(false);
       }

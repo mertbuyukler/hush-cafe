@@ -195,7 +195,7 @@ export default function CategoryManager() {
                   ) : categories.length === 0 ? (
                     <tr><td colSpan={3} className="p-8 text-center text-zinc-500">No categories found.</td></tr>
                   ) : (
-                    categories.map((cat: any) => (
+                    categories.map((cat: Category) => (
                       <tr key={cat.id} className="hover:bg-zinc-800/30 transition-colors group">
                         <td className="p-4 text-zinc-200 font-medium">{cat.name}</td>
                         <td className="p-4 text-zinc-400 font-mono text-sm">{cat.slug}</td>

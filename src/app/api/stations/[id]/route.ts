@@ -24,7 +24,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       return NextResponse.json({ error: 'Name and Stream URL are required' }, { status: 400 });
     }
 
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
 
     const { success } = await db.prepare(
       'UPDATE stations SET name = ?, description = ?, stream_url = ?, cover_image_url = ?, category_id = ?, is_featured = ? WHERE id = ?'
@@ -56,7 +57,8 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 
   try {
     const { id } = await params;
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     
     const { success } = await db.prepare('DELETE FROM stations WHERE id = ?').bind(id).run();
     

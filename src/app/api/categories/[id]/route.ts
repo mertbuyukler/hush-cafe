@@ -29,7 +29,8 @@ export async function PUT(request: Request, { params }: { params: Promise<{ id: 
       return NextResponse.json({ error: 'Slug can only contain lowercase letters, numbers, and hyphens' }, { status: 400 });
     }
 
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
 
     // Check if slug exists on ANOTHER category
     const existing = await db.prepare('SELECT id FROM categories WHERE slug = ? AND id != ?').bind(slug, id).first();
@@ -57,7 +58,8 @@ export async function DELETE(request: Request, { params }: { params: Promise<{ i
 
   try {
     const { id } = await params;
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     
     // Ensure we don't delete categories that have stations attached
     // Or we rely on SQLite ON DELETE SET NULL which we defined in schema.

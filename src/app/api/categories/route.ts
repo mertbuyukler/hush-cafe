@@ -7,7 +7,8 @@ export const runtime = 'edge';
 // Public GET route for frontend
 export async function GET(request: Request) {
   try {
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     const { results } = await db.prepare('SELECT * FROM categories ORDER BY name ASC').all();
     return NextResponse.json(results, { status: 200 });
   } catch (error) {
@@ -38,7 +39,8 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Slug can only contain lowercase letters, numbers, and hyphens' }, { status: 400 });
     }
 
-    const db = getRequestContext().env.DB as any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const db = (getRequestContext().env as any).DB as any;
     
     // Check if slug already exists
     const existing = await db.prepare('SELECT id FROM categories WHERE slug = ?').bind(slug).first();

@@ -182,7 +182,7 @@ export default function StationManager() {
                 <label className="block text-xs font-medium text-zinc-400 mb-1">Category</label>
                 <select
                   value={categoryId}
-                  onChange={(e) => setCategoryId(e.target.value)}
+                  onChange={(e) => setCategoryId(e.target.value === '' ? '' : Number(e.target.value))}
                   className="w-full bg-zinc-950 border border-zinc-800 text-white rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-zinc-500"
                 >
                   <option value="">Uncategorized</option>
@@ -266,7 +266,7 @@ export default function StationManager() {
                   ) : stations.length === 0 ? (
                     <tr><td colSpan={4} className="p-8 text-center text-zinc-500">No stations found. Create one.</td></tr>
                   ) : (
-                    stations.map((st: any) => {
+                    stations.map((st: Station) => {
                       const cat = categories.find(c => c.id === st.category_id);
                       return (
                         <tr key={st.id} className="hover:bg-zinc-800/30 transition-colors group">
