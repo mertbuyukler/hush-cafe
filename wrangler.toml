@@ -1,0 +1,8 @@
+name = "hush-cafe"
+compatibility_date = "2024-03-20"
+pages_build_output_dir = ".vercel/output/static"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "hush_db"
+database_id = "2e22075b-740f-4c54-ba47-0ef7e6d4c77d"
